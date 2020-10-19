@@ -1,20 +1,51 @@
 import math
 
 
-def f1(x1, x2):
-    return 100 * (x2 - x1 ** 2) ** 2 + (1 - x1) ** 2
+def f1(x):
+    return 100 * (x[1] - x[0] ** 2) ** 2 + (1 - x[0]) ** 2
 
 
-def f2(x1, x2):
-    return (x2 - x1 ** 2) ** 2 + (1 - x1) ** 2
+def f1_deriv(x, index):
+    return {
+        1: 2 * (2000 * x[0] ** 3 - 200 * x[0] * x[1] + x[0] - 1),
+        2: 200 * (x[1] - x[0] ** 2)
+    }.get(index)
 
 
-def f3(x1, x2):
-    return (1.5 - x1 * (1 - x2)) ** 2 + (2.25 - x1 * (1 - x2 ** 2)) ** 2 + (2.625 - x1 * (1 - x2 ** 3)) ** 2
+def f2(x):
+    return (x[1] - x[0] ** 2) ** 2 + (1 - x[0]) ** 2
 
 
-def f4(x1, x2, x3, x4):
-    return (x1 + x2) ** 2 + 5 * (x3 - x4) ** 2 + (x2 - 2 * x3) ** 4 + 10 * (x1 - x4) ** 4
+def f2_deriv(x, index):
+    return {
+        1: 2 * (2 * x[0] ** 3 - 2 * x[0] * x[1] + x[0] - 1),
+        2: 2 * (x[1] - x[0] ** 2)
+    }.get(index)
+
+
+def f3(x):
+    return (1.5 - x[0] * (1 - x[1])) ** 2 + (2.25 - x[0] * (1 - x[1] ** 2)) ** 2 + (2.625 - x[0] * (1 - x[1] ** 3)) ** 2
+
+
+def f3_deriv(x, index):
+    return {
+        1: 2 * x[0] * (
+                x[1] ** 6 + x[1] ** 4 - 2 * x[1] ** 3 - x[1] ** 2 - 2 * x[1] + 3) + 5.25 * x[1] ** 3 + 4.5 * x[1] ** 2 + 3 * x[1] - 12.75,
+        2: x[0] * (x[0] * (6 * x[1] ** 5 + 4 * x[1] ** 3 - 6 * x[1] ** 2 - 2 * x[1] - 2) + 15.75 * x[1] ** 2 + 9 * x[1] + 3)
+    }.get(index)
+
+
+def f4(x):
+    return (x[0] + x[1]) ** 2 + 5 * (x[2] - x[3]) ** 2 + (x[1] - 2 * x[2]) ** 4 + 10 * (x[0] - x[3]) ** 4
+
+
+def f4_deriv(x, index):
+    return {
+        1: 2 * (20 * (x[0] - x[3]) ** 3 + x[0] + x[1]),
+        2: 2 * (x[0] + 2 * (x[1] - 2 * x[2]) ** 3 + x[1]),
+        3: 10 * (x[2] - x[3]) - 8 * (x[1] - 2 * x[2]) ** 3,
+        4: 10 * (-4 * (x[0] - x[3]) ** 3 + x[3] - x[2])
+    }.get(index)
 
 
 def getFunc(index):
@@ -22,4 +53,12 @@ def getFunc(index):
             2: f2,
             3: f3,
             4: f4
+            }.get(index)
+
+
+def getFuncDeriv(index):
+    return {1: f1_deriv,
+            2: f2_deriv,
+            3: f3_deriv,
+            4: f4_deriv
             }.get(index)
