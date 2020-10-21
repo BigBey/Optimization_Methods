@@ -23,7 +23,7 @@ def coordinateDescent(x, func_number, eps, max_iter, learning_rate):
 
 
 if __name__ == '__main__':
-    x, counter, coordinates = coordinateDescent([-1, -1, -1, -1], 4, 0.0001, 5000, 0.05)
+    x, counter, coordinates = coordinateDescent([-1, -1], 1, 0.00001, 5000, 0.002)
     print(x)
     print(counter)
     print(f.getFunc(1)(x))
