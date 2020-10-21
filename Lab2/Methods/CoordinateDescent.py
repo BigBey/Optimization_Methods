@@ -20,3 +20,10 @@ def coordinateDescent(x, func_number, eps, max_iter, learning_rate):
             break
         x = new_x
     return x, counter, coordinates
+
+
+if __name__ == '__main__':
+    x, counter, coordinates = coordinateDescent([-1, -1, -1, -1], 4, 0.0001, 5000, 0.05)
+    print(x)
+    print(counter)
+    print(f.getFunc(1)(x))
